@@ -1,0 +1,191 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/stackgl/glslify"
+
+    >glslify (v6.0.2)</a>
+</h1>
+<h4>A node.js-style module system for GLSL!</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.glslify">module glslify</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.glslify.glslify">
+            function <span class="apidocSignatureSpan"></span>glslify
+            <span class="apidocSignatureSpan">(arg, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.glslify.compile">
+            function <span class="apidocSignatureSpan">glslify.</span>compile
+            <span class="apidocSignatureSpan">(src, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.glslify.file">
+            function <span class="apidocSignatureSpan">glslify.</span>file
+            <span class="apidocSignatureSpan">(file, opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.glslify" id="apidoc.module.glslify">module glslify</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.glslify.glslify" id="apidoc.element.glslify.glslify">
+        function <span class="apidocSignatureSpan"></span>glslify
+        <span class="apidocSignatureSpan">(arg, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">glslify = function (arg, opts) {
+  if (Array.isArray(arg)) { // template string
+    return iface().tag.apply(null, arguments)
+  } else if (typeof arg === &#x27;string&#x27; &#x26;&#x26; !/\n/.test(arg) &#x26;&#x26; opts &#x26;&#x26; opts._flags) {
+    // browserify transform
+    return require(&#x27;./transform.js&#x27;).apply(this, arguments)
+  } else if (typeof arg === &#x27;string&#x27; &#x26;&#x26; /\n/.test(arg)) { // source string
+    return iface().compile(arg, opts)
+  } else if (typeof arg === &#x27;string&#x27;) { // source file
+    return iface().file(arg, opts)
+  } else throw new Error(&#x27;unhandled argument type: &#x27; + typeof arg)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.glslify.compile" id="apidoc.element.glslify.compile">
+        function <span class="apidocSignatureSpan">glslify.</span>compile
+        <span class="apidocSignatureSpan">(src, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compile = function (src, opts) {
+  return iface().compile(src, opts)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+[tagged template string function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals
+).
+
+### var src = glsl(file, opts)
+### var src = glsl(shaderSource, opts)
+
+Compile a shader using an inline shader string or a file name.
+
+These are convencience methods provided that call `glsl.<span class="apidocCodeKeywordSpan">compile</span>()` or
+`glsl.file()` accordingly. These methods are also provided for backwards
+compatibility with the previous `&#x3c; 6` interface.
+
+Optionally provide:
+
+* `opts.basedir` - directory to resolve relative paths
+* `opts.transform` - an array of transform functions, transform module name
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.glslify.file" id="apidoc.element.glslify.file">
+        function <span class="apidocSignatureSpan">glslify.</span>file
+        <span class="apidocSignatureSpan">(file, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">file = function (file, opts) {
+  return iface().file(file, opts)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### var src = glsl(file, opts)
+### var src = glsl(shaderSource, opts)
+
+Compile a shader using an inline shader string or a file name.
+
+These are convencience methods provided that call `glsl.compile()` or
+`glsl.<span class="apidocCodeKeywordSpan">file</span>()` accordingly. These methods are also provided for backwards
+compatibility with the previous `&#x3c; 6` interface.
+
+Optionally provide:
+
+* `opts.basedir` - directory to resolve relative paths
+* `opts.transform` - an array of transform functions, transform module name
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
